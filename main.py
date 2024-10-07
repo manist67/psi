@@ -12,6 +12,7 @@ import numpy as np
 
 def generate_random_binary_polynomial(degree):
     """이진 계수로 구성된 무작위 다항식 생성 (계수는 0 또는 1)"""
+    random.seed("TEST_SEED") # 서버쪽 encrpt, client 측 encrtpt를 정확하게 하기 위해서 공통 시드 사용
     return np.poly1d([random.choice([0, 1]) for _ in range(degree)])
 
 
@@ -25,6 +26,7 @@ def encrypt(plain_set, public_key, q, t, n):
 
     for plain in plain_set:
         m_polynomial = convert_message_to_polynomial(plain, t)
+        # 간단한 구현을 위해서 e 값을 뺏음
         c0 = np.poly1d([ i % q for i in (p0 * u + m_polynomial).c ])
         c1 = np.poly1d([ i % q for i in (p1 * u).c ])
 
@@ -48,8 +50,12 @@ def decrypt(cipher_set, secret_key, q, t):
     plain_set = []
     for cipher_value in cipher_set:
         (c0, c1) = cipher_value
-        m = np.poly1d( [ coeff % q for coeff in (c0 + secret_key * c1).c] )
-        plain_set.append( m )
+        # 복호화 + 평문 공간 변화
+        # 복호확 수식 p = (c0 + secret_key * c1) % q
+        # 평문 공간 변환 message = p % t
+        decrypt_poly = np.poly1d( [ coeff % q for coeff in (c0 + secret_key * c1).c] )
+        plain_message = np.poly1d([coeff % t for coeff in decrypt_poly.c])
+        plain_set.append( convert_polynomial_to_message(plain_message, t) )
     
     return plain_set
 
@@ -93,12 +99,12 @@ if __name__ == "__main__":
     """ client 구현 부 """
     print(convert_message_to_polynomial(37128, 256).c)
 
-    client_set = [ 37128 ]
+    client_set = [ 37128, 231, 3245, 49423 ]
     client_cipher_set = encrypt(client_set, public_key, params["q"], params["t"], params["n"])
 
     """ server 구현 부 """
 
-    server_set = [ 37128, 273845, 382391, 283467, 374959 ]
+    server_set = [ 37128, 273845, 382391, 283467, 231, 374959, 1234235 ]
     results = find_intersection(client_cipher_set, server_set, public_key, params)
 
     """ client 구현 부 """
