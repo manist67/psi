@@ -1,5 +1,6 @@
 import random
 import numpy as np
+from utils import get_divider, mod_q, generate_random_binary_polynomial, generate_random_polynomaial
 
 class KeyGenerator:
     def __init__(self, params):
@@ -9,30 +10,30 @@ class KeyGenerator:
 
     def generate_secret_key(self):
         # 비밀키는 이진 다항식 (계수는 0 또는 1)
-        secret_key = self.generate_random_binary_polynomial(self.n)
+        secret_key = generate_random_binary_polynomial(self.n)
         return secret_key
 
     def generate_public_key(self, secret_key):
         # 공개키는 (p0, p1)로 구성됨
         # 무작위 이진 다항식 u, 작은 잡음 다항식 e 생성
-        u = self.generate_random_binary_polynomial(self.n)
+        a = generate_random_polynomaial(self.n, self.q)
+
+        # 공개키 계산: p = (-a * s + e) mod q
         e = self.generate_small_noise_polynomial(self.n)
 
-        # 공개키 계산: p0 = - (s * u + e) mod q, p1 = u
-        p0 = np.poly1d([ -c % self.q for c in (secret_key * u + e).c]) 
-        p1 = u
+        p = np.polymul(a, -1)
+        p = np.polymul(p, secret_key)
+        p = np.polyadd(p, e)
+        p = np.polydiv(p,  get_divider(self.n))[1] #np.poly1d([ (-int(c % self.q)) for c in (secret_key * u + e).c])
+        p = mod_q(p, self.q)
 
-        return (p0, p1)
+        return (a, p)
 
     def generate_keys(self):
         secret_key = self.generate_secret_key()
         public_key = self.generate_public_key(secret_key)
-
-        return public_key, secret_key
-
-    def generate_random_binary_polynomial(self, degree):
-        # 이진 다항식 생성 (계수는 0 또는 1)
-        return np.poly1d([random.choice([0, 1]) for _ in range(degree)])
+        
+        return (public_key, secret_key)
 
     def generate_small_noise_polynomial(self, degree):
         # 작은 잡음 다항식 생성 (계수는 -1, 0, 1과 같은 작은 정수)
