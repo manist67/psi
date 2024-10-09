@@ -29,6 +29,11 @@ class Rq(object):
         coeffs = crange(coeffs, q)
         self.poly = np.poly1d(np.array(coeffs, dtype=np.int64))
 
+    def __repr__(self):
+        template = 'Rq: {} (mod {}), reminder range: ({}, {}]'
+        return template.format(self.poly.__repr__(), self.q,
+                               -self.q//2, self.q//2)
+    
     def __len__(self):
         return len(self.poly)  # degree of a polynomial
 
