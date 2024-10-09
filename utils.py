@@ -8,10 +8,7 @@ def convert_message_to_coeffs(message, t, n):
     while message != 0:
         poly.append(message % t)
         message //= t
-    
-    while n > len(poly):
-        poly.append(0)
-    
+        
     poly.reverse()
 
     return poly
@@ -19,7 +16,8 @@ def convert_message_to_coeffs(message, t, n):
 
 def convert_coeffs_to_message(c, t):
     m = 0
-    for i, cof in enumerate(c):
+
+    for i, cof in enumerate(c[::-1]):
         m += (cof * (t ** i))
 
     return m
