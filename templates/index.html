@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSI demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <main>
+        <article>
+            <h1>Client</h1>
+            <div class="info-wrapper">
+                <div class="key-wrapper">
+                    <p><b>public_key A0</b> : <span class="public-key a0"></span></p>
+                    <p><b>public_key A1</b> : <span class="public-key a1"></span></p>
+                    <p><b>secret_key</b> : <span class="secret-key"></span> </p>
+                </div>
+                <div class="set-wrapper">
+                    <div class="plain-set r-border">
+                        <h2>plain set</h2>
+                        <div class="div-message div-client"></div>
+                        <div class="div-button">
+                            <input type="number" id="input-client">
+                            <button id="btn-client">추가</button>
+                        </div>
+                    </div>
+                    <div class="cipher-set">
+                        <h2>cipher set</h2>
+                        <div class="div-message div-cipher-client">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    
+        <article>
+            <h1>Server</h1>
+            <div class="info-wrapper">
+                <div class="key-wrapper">
+                    <p><b>public_key A0</b> : <span class="public-key a0"></span></p>
+                    <p><b>public_key A1</b> : <span class="public-key a1"></span></p>
+                    <p>---</p>
+                </div>
+                <div class="set-wrapper">
+                    <div class="plain-set r-border">
+                        <h2>plain set</h2>
+                        <div class="div-message div-server"></div>
+                        <div class="div-button">
+                            <input type="number" id="input-server">
+                            <button id="btn-server">추가</button>
+                        </div>
+                    </div>
+                    <div class="cipher-set">
+                        <h2>cipher set</h2>
+                        <div class="div-message div-cipher-server">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        
+    
+        <article>
+            <h1>Intersection Result</h1>
+            <div class="info-wrapper">
+                <div class="key-wrapper">
+                    <p>Client-Server</p>
+                </div>
+                <div class="set-wrapper">
+                    <div class="cipher-set r-border">
+                        <h2>intersection result (Server-Side Job)</h2>
+                        <div class="div-message intersection-wrapper">
+
+                        </div>
+                    </div>
+                    <div class="plain-set">
+                        <h2>decrypt result (Client-Side Job)</h2>
+                        <div class="intersection-decrypt-wrapper">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+    <aside class="btn-wrapper">
+        <!-- <button id="btn-add-random-number"> 랜덤 숫자 추가 </button> -->
+        <button id="btn-generate-key"> 키 발급 </button>
+        <button id="btn-random-number-server"> (server) 랜덤 값 추가 </button>
+
+        <button id="btn-client-encrypt"> (client) 암호화 </button>        
+        <button id="btn-server-encrypt"> (server) 암호화 </button>
+        <button id="btn-intersection"> intersection </button>
+        <button id="btn-decrypt-client"> (client) 복호화 </button>
+    </aside>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

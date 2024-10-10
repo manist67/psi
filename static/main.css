@@ -1,0 +1,165 @@
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 16px;
+}
+
+main article {
+    flex: 1;
+    border: 1px solid black;
+    margin: 32px;
+    background: rgba(0,0,0, 0.05);
+}
+
+h1 {
+    font-size: 32px;
+    text-align: center;
+    margin: 16px;
+}
+
+h2 {
+    font-size: 24px;
+    text-align: center;
+}
+
+p {
+    font-size: 16px;
+}
+
+.info-wrapper {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid black;
+    min-height: 500px;
+}
+
+.info-wrapper > .key-wrapper {
+    padding: 8px;
+}
+
+.btn-wrapper {
+    width: 200px;
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 30%;
+    background: rgba(0,0,0, 0.3)    
+}
+
+.btn-wrapper button{
+    display: inline-block;
+    margin: 8px;
+}
+
+.set-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid black;
+}
+
+.set-wrapper > .plain-set {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 8px;
+}
+
+.r-border {
+    border-right: 1px solid black;
+}
+
+.set-wrapper > .plain-set > .div-message {
+    padding: 8px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 8px;
+    text-align: center;
+}
+
+.set-wrapper > .plain-set > .div-message > .row-data {
+    border: 1px solid black;
+    border-radius: 4.5px;
+    background-color: white;
+    cursor: pointer;
+    line-height: 4rem;
+}
+
+.set-wrapper > .plain-set > .div-button {
+    margin-top: auto;
+    padding-top: 16px;
+    text-align: center;
+}
+
+.set-wrapper > .cipher-set {
+    flex: 2;
+    padding: 8px;
+}
+
+.set-wrapper > .cipher-set > .div-message > .div-encrypt-row {
+    margin-bottom: 8px;
+}
+
+.set-wrapper > .cipher-set > .div-message > .div-encrypt-row  > .p-origin {
+    font-weight: bold;
+}
+
+.intersection-decrypt-wrapper {
+    padding: 8px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 8px;
+    text-align: center;
+}
+
+.intersection-decrypt-wrapper .div-item {
+    grid-column: span 3;
+    border: 1px solid black;
+    border-radius: 4.5px;
+    background-color: #ffff6c;
+    line-height: 4rem;
+}
+
+.intersection-decrypt-wrapper .div-divide {
+    grid-column: span 3;
+    border-bottom: 1px solid black;
+}
+
+.intersection-decrypt-wrapper .div-result {
+    border: 1px solid black;
+    border-radius: 4.5px;
+    background-color: white;
+    line-height: 4rem;
+}
+.intersection-decrypt-wrapper .div-result.check {
+    background-color: #ff6c6c;
+    color: white;
+}
+
+
+@keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+.light-on {
+    animation: blink 1s infinite; /* 1초 간격으로 무한 반복 */
+    background: #cfe528a0;
+    font-size: 2rem;
+    color: black;
+}
