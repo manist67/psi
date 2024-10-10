@@ -61,3 +61,12 @@ class Rq(object):
         for _ in range(integer-1):
             ret *= ret
         return ret
+    
+    def serialize(self):
+        return {
+            "poly": self.poly.c.tolist(),
+            "q": self.q
+        }
+
+    def deserialize(coeffs, q):
+        return Rq(coeffs,  q)
