@@ -5,8 +5,8 @@ import numpy as np
 
 if __name__ == '__main__':
     n = 8  # 차수
-    q = 67108289 
-    t = 256
+    q = 67108289 # 암호문 계산시 사용되는 값
+    t = 256 # 평문 공간 계수
     std = 3  # 가우시안 분포
 
     rlwe = RLWE(n, q, t, std)
