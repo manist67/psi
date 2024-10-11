@@ -5,8 +5,8 @@ RLWE를 이용한 동형 암호 구현
 
 """
 import numpy as np
-from Rq import Rq
-from utils import discrete_uniform, discrete_gaussian
+from fhe.Rq import Rq
+from fhe.utils import discrete_uniform, discrete_gaussian
 
 
 class RLWE:

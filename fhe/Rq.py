@@ -5,7 +5,7 @@
     ring polynomial 구현
 """
 import numpy as np
-from utils import crange
+from fhe.utils import crange
 
 class Rq(object):
     '''

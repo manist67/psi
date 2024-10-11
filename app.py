@@ -4,9 +4,9 @@ demo application for PSI
 from flask import Flask, render_template, jsonify, request, abort
 
 
-from RLWE import RLWE
-from utils import convert_message_to_coeffs, convert_coeffs_to_message, check_is_exists
-from Rq import Rq
+from fhe.RLWE import RLWE
+from fhe.utils import convert_message_to_coeffs, convert_coeffs_to_message, check_is_exists
+from fhe.Rq import Rq
 
 n = 8  # 차수
 q = 67108289 

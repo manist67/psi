@@ -1,6 +1,6 @@
-from utils import convert_message_to_coeffs, convert_coeffs_to_message, check_is_exists
-from RLWE import RLWE
-from Rq import Rq
+from fhe.utils import convert_message_to_coeffs, convert_coeffs_to_message, check_is_exists
+from fhe.RLWE import RLWE
+from fhe.Rq import Rq
 
 if __name__ == '__main__':
     n = 8  # 차수
